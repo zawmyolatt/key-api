@@ -60,6 +60,7 @@
         ],
         "post-install-cmd": [
             "php artisan clear-compiled",
+            "php artisan migrate",
             "chmod -R 777 public/"
         ]
     }

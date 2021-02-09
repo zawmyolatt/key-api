@@ -33,7 +33,3 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
-
-    # laravel-deploy ? 
-    # Already setup auto deployment on heroku server
-    # 
