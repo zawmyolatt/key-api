@@ -31,10 +31,10 @@ class ObjectController extends ApiController
     public function store(ObjectRequest $request)
     {
         $inputKey = array_key_first($request->all());
-        $object = ObjectData::updateOrCreate(
-            ['key' => $inputKey],
-            ['value' => $request->$inputKey]
-        );
+        $object = ObjectData::create([
+            'key' => $inputKey,
+            'value' => $request->$inputKey
+        ]);
         return $this->respondWithItem($object, new ObjectDataTransformer(), null, [], 201);
     }
 

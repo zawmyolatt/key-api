@@ -51,6 +51,27 @@
  * Returns list of objects
  */
 
+ /**
+ * @OA\Post(
+ *     path="/object",
+ *     tags={"Objects"},
+ *     operationId="storeObject",
+ *     summary="Create Object",
+ *     description="Creates a new Object",
+ *     @OA\RequestBody(
+ *        required=true,
+ *        description="Object details",
+ *        @OA\JsonContent(
+ *           @OA\Property(property="mykey", type="string", format="mykey", example="value1")
+ *        ),
+ *     ),
+ *     @OA\Response(response=201, description="Created"),
+ *     @OA\Response(response=400, description="Bad request"),
+ *     @OA\Response(response=404, description="Not Found")
+ * )
+ *
+ */
+
 /**
  * @OA\Get(
  *      path="/object/{key}",

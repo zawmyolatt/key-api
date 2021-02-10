@@ -54,6 +54,45 @@
                 }
             }
         },
+        "/object": {
+            "post": {
+                "tags": [
+                    "Objects"
+                ],
+                "summary": "Create Object",
+                "description": "Creates a new Object",
+                "operationId": "storeObject",
+                "requestBody": {
+                    "description": "Object details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mykey": {
+                                        "type": "string",
+                                        "format": "mykey",
+                                        "example": "value1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/object/{key}": {
             "get": {
                 "tags": [
