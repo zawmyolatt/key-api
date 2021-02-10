@@ -1,0 +1,141 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Object Access Api",
+        "contact": {
+            "name": "Zaw Myo Latt",
+            "url": "http://zawmyolatt.github.io",
+            "email": "zawmyolatt.ucsy@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://key-api.local/api",
+            "description": "Key Api server"
+        }
+    ],
+    "paths": {
+        "/object/get_all_records": {
+            "get": {
+                "tags": [
+                    "Objects"
+                ],
+                "summary": "Get list of objects",
+                "description": "Returns list of objects",
+                "operationId": "getObjectsList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page to return",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Maximum number of items to return per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/object": {
+            "post": {
+                "tags": [
+                    "Objects"
+                ],
+                "summary": "Create Object",
+                "description": "Creates a new Object",
+                "operationId": "storeObject",
+                "requestBody": {
+                    "description": "Object details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mykey": {
+                                        "type": "string",
+                                        "format": "mykey",
+                                        "example": "value1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/object/{key}": {
+            "get": {
+                "tags": [
+                    "Objects"
+                ],
+                "summary": "Get object information",
+                "description": "Returns object data",
+                "operationId": "getObjectByKey",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "Object Key",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "timestamp",
+                        "in": "query",
+                        "description": "Request Timestamp",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

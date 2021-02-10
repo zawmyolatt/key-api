@@ -63,6 +63,7 @@
         "post-install-cmd": [
             "php artisan clear-compiled",
             "php artisan migrate --force",
+            "rm -rf storage/api-docs/api-docs.json",
             "php artisan l5-swagger:generate",
             "chmod -R 777 public/"
         ]
