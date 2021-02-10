@@ -18,8 +18,7 @@ class CreateObjectsTable extends Migration
             $table->id();
             $table->string('key');
             $table->longText('value');
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
     }
 
