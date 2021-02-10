@@ -18,7 +18,7 @@ class ObjectController extends ApiController
     {
         $page = ($request->page) ?? 1;
         $limit = ($request->limit) ?? env('DEFAULT_PAGINATION_LIMIT');
-        $objects = (new ObjectData())->simplePaginate($limit, ['*'], 'page', $page);
+        $objects = (new ObjectData())->distinct('key')->simplePaginate($limit, ['*'], 'page', $page);
         return $this->respondWithCollection($objects, new ObjectDataTransformer());
     }
 
