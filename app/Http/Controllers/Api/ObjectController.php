@@ -6,7 +6,6 @@ use App\Http\Requests\Api\ObjectRequest;
 use App\Models\ObjectData;
 use App\Transformers\ObjectDataTransformer;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class ObjectController extends ApiController
 {
@@ -19,10 +18,7 @@ class ObjectController extends ApiController
     {
         $page = ($request->page) ?? 1;
         $limit = ($request->limit) ?? env('DEFAULT_PAGINATION_LIMIT');
-        $sortedObjects = ObjectData::orderBy('created_at', 'desc');
-        $objects = DB::table(DB::raw("({$sortedObjects->toSql()}) as sub"))
-                    ->groupBy('key')
-                    ->simplePaginate($limit, ['*'], 'page', $page);
+        $objects = (new ObjectData())->simplePaginate($limit, ['*'], 'page', $page);
         return $this->respondWithCollection($objects, new ObjectDataTransformer());
     }
 
