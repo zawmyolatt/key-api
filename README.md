@@ -1,6 +1,9 @@
 # Key Access API Exercise
-
-<p align="center"><img src="https://proxsoftwaresolution.com/uploads/images/game.jpg"></p>
+- Implement API routes
+- Swagger Annotation
+- Unit Tests
+- Setup Git Workflow
+- Setup Auto deployed to Heroku at https://key-api.herokuapp.com
 
 ## Requirements
 
@@ -18,7 +21,7 @@ vendor/bin/phpunit --testdox
 
 **Demo**
 
-<a href="https://key-api.herokuapp.com" target="_blank" align="center">Click Here!</a>
+<a href="https://key-api.herokuapp.com" align="center">Click Here!</a>
 
 ## Operation & Test Files Location
 
