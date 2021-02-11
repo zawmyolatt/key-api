@@ -27,8 +27,8 @@ class ObjectDataTransformer extends TransformerAbstract
             'id' => $objectData->id,
             'key' => $objectData->key,
             'value' => $objectData->value,
-            'timestamp' => $objectData->updated_at->timestamp,
-            'updated_at' => (string) $objectData->updated_at
+            'timestamp' => $objectData->created_at->timestamp,
+            'created_at' => (string) $objectData->created_at
         ];
     }
 

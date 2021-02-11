@@ -27,7 +27,7 @@ class ObjectControllerTest extends TestCase
         $this->assertArrayHasKey('key', $firstData);
         $this->assertArrayHasKey('value', $firstData);
         $this->assertArrayHasKey('timestamp', $firstData);
-        $this->assertArrayHasKey('updated_at', $firstData);
+        $this->assertArrayHasKey('created_at', $firstData);
     }
 
     public function testCreateValidationErrors()
@@ -77,8 +77,8 @@ class ObjectControllerTest extends TestCase
             'id' => $objectData->id,
             'key' => $objectData->key,
             'value' => $objectData->value,
-            'timestamp' => $objectData->updated_at->timestamp,
-            'updated_at' => (string) $objectData->updated_at
+            'timestamp' => $objectData->created_at->timestamp,
+            'created_at' => (string) $objectData->created_at
         ], $objectResponseData);
     }
 
@@ -88,14 +88,14 @@ class ObjectControllerTest extends TestCase
             'key' => 'mykey',
             'value' => 'value1',
             'created_at' => Carbon::parse('2021-02-10 18:00:00'),
-            'updated_at' => Carbon::parse('2021-02-10 18:00:00')
+            'created_at' => Carbon::parse('2021-02-10 18:00:00')
         ]);
 
         $objectData2 = ObjectData::factory()->create([
             'key' => 'mykey',
             'value' => 'value2',
             'created_at' => Carbon::parse('2021-02-10 18:05:00'),
-            'updated_at' => Carbon::parse('2021-02-10 18:05:00')
+            'created_at' => Carbon::parse('2021-02-10 18:05:00')
         ]);
 
         $response = $this->get('/api/object/mykey');
@@ -108,7 +108,7 @@ class ObjectControllerTest extends TestCase
             'id' => $objectData2->id,
             'key' => 'mykey',
             'value' => 'value2',
-            'updated_at' => '2021-02-10 18:05:00',
+            'created_at' => '2021-02-10 18:05:00',
             'timestamp' => 1612980300
         ], $objectResponseData);
     }
@@ -119,14 +119,14 @@ class ObjectControllerTest extends TestCase
             'key' => 'mykey',
             'value' => 'value1',
             'created_at' => Carbon::parse('2021-02-10 18:00:00'),
-            'updated_at' => Carbon::parse('2021-02-10 18:00:00')
+            'created_at' => Carbon::parse('2021-02-10 18:00:00')
         ]);
 
         ObjectData::factory()->create([
             'key' => 'mykey',
             'value' => 'value2',
             'created_at' => Carbon::parse('2021-02-10 18:05:00'),
-            'updated_at' => Carbon::parse('2021-02-10 18:05:00')
+            'created_at' => Carbon::parse('2021-02-10 18:05:00')
         ]);
         $requestTimestamp = Carbon::parse('2021-02-10 18:03:00')->timestamp;
         $response = $this->get('/api/object/mykey?timestamp='. $requestTimestamp);
@@ -139,7 +139,7 @@ class ObjectControllerTest extends TestCase
             'id' => $objectData1->id,
             'key' => 'mykey',
             'value' => 'value1',
-            'updated_at' => '2021-02-10 18:00:00',
+            'created_at' => '2021-02-10 18:00:00',
             'timestamp' => 1612980000
         ], $objectResponseData);
     }

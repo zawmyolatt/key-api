@@ -6,6 +6,7 @@ use App\Http\Requests\Api\ObjectRequest;
 use App\Models\ObjectData;
 use App\Transformers\ObjectDataTransformer;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ObjectController extends ApiController
 {
@@ -18,7 +19,10 @@ class ObjectController extends ApiController
     {
         $page = ($request->page) ?? 1;
         $limit = ($request->limit) ?? env('DEFAULT_PAGINATION_LIMIT');
-        $objects = (new ObjectData())->distinct('key')->simplePaginate($limit, ['*'], 'page', $page);
+        $sortedObjects = ObjectData::orderBy('created_at', 'desc');
+        $objects = DB::table(DB::raw("({$sortedObjects->toSql()}) as sub"))
+                    ->groupBy('key')
+                    ->simplePaginate($limit, ['*'], 'page', $page);
         return $this->respondWithCollection($objects, new ObjectDataTransformer());
     }
 
@@ -47,9 +51,9 @@ class ObjectController extends ApiController
     {
         $object = ObjectData::where('key', $request->key);
         if($request->filled('timestamp')) {
-            $object = $object->where('updated_at', '<=', Carbon::createFromTimestamp($request->timestamp));
+            $object = $object->where('created_at', '<=', Carbon::createFromTimestamp($request->timestamp));
         }
-        $object = $object->orderBy('updated_at', 'desc')->first();
+        $object = $object->orderBy('created_at', 'desc')->first();
         return $object ? $this->respondWithItem($object, new ObjectDataTransformer()): $this->respondWithError(404, trans('errors.no_data'));
     }
 }
