@@ -34,11 +34,8 @@ class ObjectControllerTest extends TestCase
     {
         $response = $this->post('/api/object/',[]);
         $response->assertStatus(400)->assertJson([
-            'http_code' => 400,
-            'message' => 'Bad Request',
-            'errors' => [
-                'key' => [ 'The key field is required.']
-            ]
+            "http_code" => 400,
+            "message" => "Invalid Json Body Content in Request"
         ]);
 
         $response = $this->post('/api/object/',['mykey' => '']);

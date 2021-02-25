@@ -29,7 +29,7 @@ class ObjectRequest extends ApiRequest
 
     public function getValidatorsForStore()
     {
-        if(!json_decode($this->getContent())){
+        if(!count($this->input()) && !json_decode($this->getContent())){
             $response = new Response([
                 'http_code' => 400,
                 'message' => 'Invalid Json Body Content in Request'
