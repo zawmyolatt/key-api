@@ -19,10 +19,6 @@ jobs:
     - name: PONG - Dispatch response to received PING
       if: github.event.action == 'ping'
       run: |
-        curl -X POST https://api.github.com/repos/zawmyolatt/actions-remote-dispatch-a/dispatches \
-        -H 'Accept: application/vnd.github.everest-preview+json' \
-        -u ${{ secrets.ACCESS_TOKEN }} \
-        --data '{"event_type": "pong", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
         - uses: shivammathur/setup-php@b7d1d9c9a92d8d8463ce36d7f60da34d461724f8
           with:
             php-version: '8.0'
@@ -46,3 +42,7 @@ jobs:
           run: |
             php artisan migrate
             vendor/bin/phpunit
+            curl -X POST https://api.github.com/repos/zawmyolatt/remote-dispatch/dispatches \
+            -H 'Accept: application/vnd.github.everest-preview+json' \
+            -u ${{ secrets.ACCESS_TOKEN }} \
+            --data '{"event_type": "pong", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
