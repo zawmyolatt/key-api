@@ -42,7 +42,7 @@ jobs:
     - name: E2E - Dispatch end response
       if: github.event.action == 'start_e2e'
       run: |
-        curl -X POST https://api.github.com/repos/zawmyolatt/remote-dispatch/dispatches \
+        curl -X POST https://api.github.com/repos/${{ github.repository.full_name }}/dispatches \
         -H 'Accept: application/vnd.github.everest-preview+json' \
         -u ${{ secrets.ACCESS_TOKEN }} \
         --data '{"event_type": "end_e2e", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
